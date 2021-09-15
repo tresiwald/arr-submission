@@ -18,6 +18,5 @@ task = "bws"
 
 samples = pandas.read_csv("../../data/BWS_Argument_Similarity_Corpus.csv", delimiter=",")
 samples.columns = ["id", "sentence1", "sentence2", "topic", "label"]
-samples["id"] = samples["id"].apply(int)
 
 save_topic_folds(samples, fold_topics, data_path, task)

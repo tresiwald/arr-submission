@@ -28,11 +28,11 @@ from util.training_util import seed_all, get_evaluators
 @click.option('--evaluation_steps', type=int, default=0)
 @click.option('--use_wandb', is_flag=True)
 @click.option('--wandb_tag_prefix', type=str, default="")
-@click.option('--wandb_tag_project', type=str, default="")
+@click.option('--wandb_project', type=str, default="")
 @click.option('--max_tokens', type=int, default=0)
 @click.option('--strategy_baseline_accumulation_steps', type=int, default=2)
 def main(data_file, num_labels, directed, dev_sets, test_sets, model_name, strategy, seed, batch_size, learning_rate, num_epochs, warmup_proportion, evaluation_steps,
-          use_wandb, wandb_tag_prefix, wandb_tag_project, max_tokens, strategy_baseline_accumulation_steps):
+          use_wandb, wandb_tag_prefix, wandb_project, max_tokens, strategy_baseline_accumulation_steps):
 
     strategy = STRATEGIES(strategy)
 
@@ -61,7 +61,7 @@ def main(data_file, num_labels, directed, dev_sets, test_sets, model_name, strat
                 "seed": seed,
                 "model": model_name
             },
-            project=wandb_tag_project,
+            project=wandb_project,
             reinit=True,
             tags=[wandb_tag_prefix + strategy.name]
         )
