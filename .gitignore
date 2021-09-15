@@ -1,7 +1,6 @@
 /src/wandb/
 /wandb
 /.idea
-/data
 /venv
  .DS_Store
 !/data/sample_fold_0.csv
