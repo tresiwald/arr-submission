@@ -30,9 +30,10 @@ from util.training_util import seed_all, get_evaluators
 @click.option('--wandb_tag_prefix', type=str, default="")
 @click.option('--wandb_project', type=str, default="")
 @click.option('--max_tokens', type=int, default=0)
+@click.option('--dump_path', type=str, default="")
 @click.option('--strategy_baseline_accumulation_steps', type=int, default=2)
 def main(data_file, num_labels, directed, dev_sets, test_sets, model_name, strategy, seed, batch_size, learning_rate, num_epochs, warmup_proportion, evaluation_steps,
-          use_wandb, wandb_tag_prefix, wandb_project, max_tokens, strategy_baseline_accumulation_steps):
+          use_wandb, wandb_tag_prefix, wandb_project, max_tokens, dump_path, strategy_baseline_accumulation_steps):
 
     strategy = STRATEGIES(strategy)
 
@@ -139,6 +140,9 @@ def main(data_file, num_labels, directed, dev_sets, test_sets, model_name, strat
     if max_tokens > 0:
         model_params["max_tokens"] = max_tokens
     model.fit(**model_params)
+
+    if dump_path != "":
+        model.save(dump_path + "/" + "_".join([model_name, learning_rate, batch_size]))
 
 
 if __name__ == "__main__":

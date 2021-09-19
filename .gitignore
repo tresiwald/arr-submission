@@ -2,7 +2,9 @@
 /wandb
 /.idea
 /venv
- .DS_Store
+.DS_Store
+*/.DS_Store
+*/**/.DS_Store
 !/data/sample_fold_0.csv
 !/data/sample_fold_1.csv
 !/data/sample_fold_2.csv
