@@ -4,9 +4,9 @@ from torch.utils.data import Dataset
 
 
 class NodeBasedStrategy(Dataset):
-    def __init__(self, graph):
+    def __init__(self, graph, directed=False):
         self.graph = graph
-        if type(self.graph) == networkx.DiGraph:
+        if directed:
             self.nodes = [node for node in graph.nodes() if graph.out_degree(node) > 0]
         else:
             self.nodes = list(self.graph.nodes())

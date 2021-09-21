@@ -1,13 +1,14 @@
 from random import sample
 
+import networkx
 from sentence_transformers import InputExample
 from torch.utils.data import Dataset
 
 
 class EdgeBasedStrategy(Dataset):
-    def __init__(self, graph, neighborhood_size: int = 2):
+    def __init__(self, graph, neighborhood_size: int = 2, directed:bool = False):
         self.global_dataset = EdgeBasedGlobalSampling(graph)
-        self.local_dataset = EdgeBasedLocalSampling(graph, neighborhood_size)
+        self.local_dataset = EdgeBasedLocalSampling(graph, neighborhood_size, directed)
         self.graph = graph
 
     def __len__(self):
@@ -21,9 +22,14 @@ class EdgeBasedStrategy(Dataset):
 
 
 class EdgeBasedLocalSampling(Dataset):
-    def __init__(self, graph, neighborhood_size: int = 2):
+    def __init__(self, graph, neighborhood_size: int = 2, directed:bool = False):
         self.graph = graph
-        self.nodes = list(graph.nodes())
+
+        if not directed:
+            self.nodes = [node for node in graph.nodes() if graph.out_degree(node) > 0]
+        else:
+            self.nodes = list(self.graph.nodes())
+
         self.edges = list(graph.edges())
         self.neighborhood_size = neighborhood_size
         self.neighborhood = {

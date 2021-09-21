@@ -13,8 +13,8 @@ from util.training_util import seed_all, get_evaluators
 
 
 @click.command()
-@click.option('--data_file', type=str, default="../data/sample_fold_0.csv")
-@click.option('--num_labels', type=int, default=2)
+@click.option('--data_file', type=str, default="../data/pretrain.csv")
+@click.option('--num_labels', type=int, default=3)
 @click.option('--directed', is_flag=True)
 @click.option('--dev_sets', type=str, default="dev")
 @click.option('--test_sets', type=str, default="test")

@@ -16,7 +16,7 @@ from sampling.edge import EdgeBasedStrategy
 from sampling.node import NodeBasedStrategy
 
 def get_input_samples(frame, set):
-    set_samples = frame[frame["set"] == set]
+    set_samples = frame[frame["set"] == set].sample(500)
     input_samples = [
         InputExample(
             texts=[row["sentence1"], row["sentence2"]],
@@ -32,7 +32,7 @@ def load_data(data_file, dev_sets=["dev"], test_sets=["test"]):
 
     samples = pandas.read_csv(data_file)
 
-    train_samples = samples[samples["set"] == "train"]
+    train_samples = samples[samples["set"] == "train"].sample(500)
     dev_sample_sets = {set: get_input_samples(samples, set)  for set in dev_sets}
     test_sample_sets = {set: get_input_samples(samples, set)  for set in test_sets}
 
@@ -88,7 +88,7 @@ def get_dataloader(samples, strategy: STRATEGIES, batch_size: int, shuffle: bool
     if num_labels == 2 and not directed and "BI" in str(strategy):
         samples["label"] = samples["label"].apply(float)
 
-    graph = get_graph(samples)
+    graph = get_graph(samples, directed=directed)
 
     if strategy in [STRATEGIES.BI_BASELINE, STRATEGIES.CROSS_BASELINE]:
         input_samples = [
@@ -101,7 +101,7 @@ def get_dataloader(samples, strategy: STRATEGIES, batch_size: int, shuffle: bool
 
         return DataLoader(2 * input_samples, shuffle=shuffle, batch_size=batch_size)
     else:
-        sampling_strategy = sampling_mapping[strategy](graph=graph, **strategy_params)
+        sampling_strategy = sampling_mapping[strategy](graph=graph, directed=directed, **strategy_params)
         return DataLoader(sampling_strategy, shuffle=shuffle, batch_size=batch_size)
 
 init_model = {
