@@ -11,6 +11,27 @@ services:
       dockerfile: Dockerfile.focal
 
 
+
+  lab-gpu:
+    build:
+      context: .
+      args:
+        - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    volumes:
+      - ./src:/src
+    ports:
+      - ${PORT}:8888
+    entrypoint: sh -c "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --LabApp.token='' "
+
+
+
   lab:
     build:
       context: .
