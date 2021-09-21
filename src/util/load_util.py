@@ -16,7 +16,7 @@ from sampling.edge import EdgeBasedStrategy
 from sampling.node import NodeBasedStrategy
 
 def get_input_samples(frame, set):
-    set_samples = frame[frame["set"] == set].sample(500)
+    set_samples = frame[frame["set"] == set]
     input_samples = [
         InputExample(
             texts=[row["sentence1"], row["sentence2"]],
@@ -32,7 +32,7 @@ def load_data(data_file, dev_sets=["dev"], test_sets=["test"]):
 
     samples = pandas.read_csv(data_file)
 
-    train_samples = samples[samples["set"] == "train"].sample(500)
+    train_samples = samples[samples["set"] == "train"]
     dev_sample_sets = {set: get_input_samples(samples, set)  for set in dev_sets}
     test_sample_sets = {set: get_input_samples(samples, set)  for set in test_sets}
 
