@@ -14,3 +14,5 @@ scikit_learn==0.24.2
 seaborn==0.11.2
 utils==1.0.1
 wandb==0.12.1
+ipywidgets==8.0.0a6
+datasets==1.12.1
