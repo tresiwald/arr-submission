@@ -5,12 +5,13 @@ These details include:
 * The results of the instability test using the Brown-Forsyth test `stability_experiment-i.csv, stability_experiment-ii.csv, stability_experiment-iii.csv`
 
 ## Build Docker
-For setting up the docker run the following command:
-```
+For setting up the docker containers, run the following commands:
+```sh
 docker-compose build
-docker-compose up lab
+docker-compose up lab # CPU
+docker-compose up lab-gpu # GPU
 ```
-After building the docker container and start it you can access a JupyterLab instance on port `8080.
+After building the docker container and start it you can access a JupyterLab instance on port `8000`.
 
 ## Prepare Datasets
 To prepare all the dataset for using with our approach you find in `src/parsing` the python code to parse all the used dataset und generate the different folds. For this purpose please put the downloaded dataset in the folder `data`.
