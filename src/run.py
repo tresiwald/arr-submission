@@ -142,7 +142,7 @@ def main(data_file, num_labels, directed, dev_sets, test_sets, model_name, strat
     model.fit(**model_params)
 
     if dump_path != "":
-        model.save(dump_path + "/" + "_".join([model_name, learning_rate, batch_size]))
+        model.save(dump_path + "/" + "_".join([model_name, str(learning_rate), str(batch_size)]))
 
 
 if __name__ == "__main__":
