@@ -3,6 +3,7 @@ from datetime import datetime
 import click
 import torch
 import wandb
+import profile
 from sentence_transformers import losses
 
 from util.strategies import STRATEGIES
@@ -10,7 +11,6 @@ from model.AdjustedSoftmaxLoss import AdjustedSoftmaxLoss
 from util.evaluators import EvaluatorWrapper
 from util.load_util import load_data, get_dataloader, init_model
 from util.training_util import seed_all, get_evaluators
-
 
 @click.command()
 @click.option('--data_file', type=str, default="../data/pretrain.csv")
