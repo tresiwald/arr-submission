@@ -25,7 +25,7 @@ class EdgeBasedLocalSampling(Dataset):
     def __init__(self, graph, neighborhood_size: int = 2, directed:bool = False):
         self.graph = graph
 
-        if not directed:
+        if directed:
             self.nodes = [node for node in graph.nodes() if graph.out_degree(node) > 0]
         else:
             self.nodes = list(self.graph.nodes())
