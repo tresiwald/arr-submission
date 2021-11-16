@@ -4,7 +4,6 @@ The structure includes the folder `src` with the code, `data` that includes an t
 These details include:
 * The optimized batch sizes for the three experiments `batch-sizes_experiment-i.csv, batch-sizes_experiment-ii.csv, batch-sizes_experiment-iii.csv`
 * The results of the instability tests using the Brown-Forsyth test `stability_experiment-i.csv, stability_experiment-ii.csv, stability_experiment-iii.csv`
-* The results of the significance test susing the MannWhitney U-test `stability_experiment-i.csv, stability_experiment-ii.csv, stability_experiment-iii.csv`
 
 
 
