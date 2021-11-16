@@ -239,8 +239,6 @@ class NodeSentenceTransformer(SentenceTransformer):
                 tokenized["token_type_ids"] = tokenized["token_type_ids"][:,:200]
                 tokenized["attention_mask"] = tokenized["attention_mask"][:,:200]
 
-                print("bigger")
-
             #batch_to_device(tokenized, self._target_device)
             sentence_features.append(tokenized)
 
